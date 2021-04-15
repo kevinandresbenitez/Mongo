@@ -1,0 +1,91 @@
+<%- include("../partials/header.ejs")%>
+
+
+<div class="container-fluid">
+
+    <%if(flash && flash.length > 0){%>
+        <div class="col-12 col-md-8 my-5 mx-auto alert alert-success">
+            <h4><%= flash[0]%> </h4>
+        </div>
+    <%}%>
+
+    <div class="row">
+        <div class="col-12 col-md-5 my-5 m-md-5 p-2 border border-dark">
+
+            <h2 class="text-center">Agregar Celular</h2>
+        
+            <form class="form-group p-2 " action="/NewPhone" method="POST">
+            
+                <label for="Phone">Nombre de Celular</label>
+                <input class="form-control" type="text" name="Phone" placeholder="Nombre Del Telefono" id="Phone" >
+                
+        
+                <div class=" my-2 mx-auto  text-center">
+                    <input type="submit" class="btn btn-primary  bg-dark "  value="Enviar" >
+                </div>
+            </form>
+        
+        
+        
+            <table class="col-12 table-responsive-sm table table-striped  table-bordered ">
+                <thead>
+                    <tr>
+                        <th>Telefono</th>                                
+                        <th>ID</th>
+                        <th>Eliminar</th>
+
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    <% phones.forEach((db,index)=>{  %>
+                        <tr>
+                            <td><%=  db.nombre %></td>
+                            <td><%=  db._id %></td>
+                            <td> <a href="/DeletePhone/<%= db._id%>" class="btn btn-danger">Eliminar</a></td>        
+                        </tr>
+                    <%})%>
+                </tbody>
+        
+            </table>
+
+        </div>
+        
+        <div class=" col-12 col-md-5 m-md-5 p-2 border border-dark">
+            <h2 class="text-center">Eliminar Usuario</h2>
+            <table class="col-12  table-responsive-sm table table-striped  table-bordered ">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>                                
+                        <th>ID</th>
+                        <th>Telefono</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    <% Users.forEach((db,index)=>{   %>
+                        <tr>
+                            <td><%=  db.nombre %></td>
+                            <td><%=  db._id %></td>
+        
+                            <td>
+                            <%  db.Telefono.forEach((obj,index)=>{  %>
+                                 <%=  obj.nombre  %>
+                            <%})%>
+                            </td>
+        
+                            <td> <a href="/DeleteUser/<%= db._id%>" class="btn btn-danger">Eliminar</a></td>
+                        </tr>
+                    <%})%>
+                </tbody>
+        
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<%- include("../partials/footer.ejs")%>
